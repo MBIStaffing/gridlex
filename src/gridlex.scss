@@ -134,6 +134,32 @@
   }
 }
 
+[class*="#{$gl-colName}-"]:not([class*="#{$gl-colName}-0"]) {
+  display: block;
+}
+[class*="#{$gl-gridName}"][class*="#{$gl-colName}-"]:not([class*="#{$gl-colName}-0"]) {
+  display: flex;
+}
+[class*="#{$gl-colName}-0"] {
+  display: none;
+}
+@mixin make-space($breakpoints) {
+  @each $breakpoint-name, $breakpoint-value in $breakpoints {
+    @media screen and (max-width: $breakpoint-value) {
+      [class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"]) {
+        display: block;
+      }
+      [class*="#{$gl-gridName}"][class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"])  {
+        display: flex;
+      }
+      [class*="#{$gl-colName}-"][class*="_#{$breakpoint-name}-0"]{
+        display: none;
+      }
+    }
+  }
+}
+@include make-space($breakpoints);
+
 /************************
     GRID BY NUMBER
 *************************/
